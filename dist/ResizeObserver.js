@@ -1,8 +1,8 @@
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
-    (global.ResizeObserver = factory());
-}(this, (function () { 'use strict';
+    (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.ResizeObserver = factory());
+})(this, (function () { 'use strict';
 
     /**
      * A collection of shims that provide minimal functionality of the ES6 collections.
@@ -44,7 +44,7 @@
                 get: function () {
                     return this.__entries__.length;
                 },
-                enumerable: true,
+                enumerable: false,
                 configurable: true
             });
             /**
@@ -634,7 +634,10 @@
         var rect = Object.create(Constr.prototype);
         // Rectangle's properties are not writable and non-enumerable.
         defineConfigurable(rect, {
-            x: x, y: y, width: width, height: height,
+            x: x,
+            y: y,
+            width: width,
+            height: height,
             top: y,
             right: x + width,
             bottom: height + y,
@@ -933,4 +936,4 @@
 
     return index;
 
-})));
+}));
